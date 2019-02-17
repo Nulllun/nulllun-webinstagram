@@ -29,7 +29,7 @@ if(isset($_GET['page'])){
 </head>
 <body>
 <h1>Welcome to WebInstagram</h1>
-<h2>Testing</h2>
+<a href="test.php">Test</a><br>
 <?php
     if(isset($_COOKIE['user']))echo 'Welcome back! ' .$_COOKIE['user'].'<br>';
     else echo 'Hello Guest!<br>';
