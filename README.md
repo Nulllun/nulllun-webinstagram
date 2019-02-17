@@ -23,4 +23,5 @@
 
 In this assignment, I used the Heroku Postgres add-on as my database
 instead of using a csv file, which is more difficult and I have gained
-the experience of deployment and setting up database.
+the experience of deployment and setting up database. Moreover, my system
+will alert the user when there is error with the uploaded image files.
