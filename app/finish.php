@@ -17,16 +17,16 @@ $pdo = pg_connect(getenv("DATABASE_URL"));
 
 if($pdo){
     //pg_prepare($dbconn, "my_query", 'SELECT * FROM shops WHERE name = $1');
-    $sql = pg_prepare($pdo,'insert_img','INSERT INTO image(iname, iclass) VALUE (?,?)');
-    $sql = pg_execute($pdo,'insert_img', array($tmp_filename,$iclass));
+    $sql = 'INSERT INTO image(iname, iclass) VALUE ('.$tmp_filename.','.$iclass.')';
+    $result = pg_query($pdo,$sql);
+    //$sql = pg_execute($pdo,'insert_img', array($tmp_filename,$iclass));
     //$sql->bind_param('si',$tmp_filename,$iclass);
-    if($sql){
+    if($result){
         //echo 'Record has been added to database.<br>';
     }else{
         echo 'Fail to add record to database.<br>';
     }
-    $sql->close();
-    $db_con->close();
+    pg_close($pdo);
 }else{
     echo 'Fail to connect database.<br>';
     echo 'Fail to add record to database.<br>';
