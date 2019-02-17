@@ -22,5 +22,10 @@ try{
 //if($create_user) echo 'Success create user table<br>';
 //if($insert_admin) echo 'Success insert admin<br>';
 //if($insert_alice) echo 'Success insert alice<br>';
+if(!extension_loaded('pgsql')){
+    echo 'pgsql is not loaded<br>';
+}
 
-?>
+if(!extension_loaded('imagick')){
+    echo 'Imagick is not loaded<br>';
+}
