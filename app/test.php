@@ -26,8 +26,11 @@ try{
 //if($insert_alice) echo 'Success insert alice<br>';
 if(!extension_loaded('pgsql')){
     echo 'pgsql is not loaded<br>';
+}else{
+    echo 'pgsql is loaded<br>';
 }
 
 if(!extension_loaded('imagick')){
     echo 'Imagick is not loaded<br>';
+    echo 'Imagick is loaded<br>';
 }
