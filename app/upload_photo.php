@@ -40,13 +40,7 @@ if(isset($_POST["imageSubmit"])) {
         $uploadOk = 0;
     }
 }
-// Check if file already exists
-/*
-if (file_exists('photo_album/'.basename($_FILES["fileToUpload"]["name"]))) {
-    echo "Sorry, file already exists.<br>";
-    $uploadOk = 0;
-}
-*/
+
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" &&  $imageFileType != "gif" ) {
     //echo "Sorry, only JPG, PNG & GIF files are allowed.<br>";
@@ -66,32 +60,6 @@ if ($uploadOk == 0) {
         setcookie('class',$iclass,time()+3600);
         header('Location: edit_photo.php');
         exit();
-        /*
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.<br>";
-
-        echo '<img src='.$target_file.' width=40% ><br>';
-
-        $db_server = 'localhost';
-        $db_name = 'webinstagram';
-        $db_username = 'michael';
-        $db_password = '123456';
-        $db_con = mysqli_connect($db_server,$db_username,$db_password,$db_name);
-        //public = 0//private = 1
-        if($db_con){
-            $sql = $db_con->prepare('INSERT INTO image(iname, iclass) VALUE (?,?)');
-            $sql->bind_param('si',$_FILES["fileToUpload"]["name"],$iclass);
-            if($sql->execute()){
-                echo 'Record has been added to database.<br>';
-            }else{
-                echo 'Fail to add record to database.<br>';
-            }
-            $sql->close();
-            $db_con->close();
-        }else{
-            echo 'Fail to connect database.<br>';
-            echo 'Fail to add record to database.<br>';
-        }
-        */
     } else {
         setcookie('uploadErr','Sorry, there was an error uploading your file',time()+30);
         header('Location: index.php');
