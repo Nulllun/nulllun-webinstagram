@@ -1,8 +1,6 @@
 <?php
 echo '<h1>Testing</h1>';
-$test = getenv("DATABASE_URL");
 $pdo = pg_connect(getenv("DATABASE_URL"));
-echo $test.'<br>';
 if(!$pdo) {
     die("Error in connection: " . pg_last_error() . '<br>');
 }else{
@@ -10,6 +8,7 @@ if(!$pdo) {
 }
 
 try{
+    pg_query($pdo,"DROP TABLE wiuser");
     $create_user = pg_query($pdo,"CREATE TABLE wiuser(uid SERIAL PRIMARY KEY, winame CHAR(20) NOT NULL, wipass CHAR(20) NOT NULL);");
     if(!$create_user){
         echo 'Cannot create table<br>';
@@ -32,10 +31,6 @@ try{
     echo $e->getMessage().'<br>';
 }
 
-
-//if($create_user) echo 'Success create user table<br>';
-//if($insert_admin) echo 'Success insert admin<br>';
-//if($insert_alice) echo 'Success insert alice<br>';
 if(!extension_loaded('pgsql')){
     echo 'pgsql is not loaded<br>';
 }else{

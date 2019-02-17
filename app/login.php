@@ -1,45 +1,48 @@
 <?php
-$db_server = 'localhost';
-$db_name = 'webinstagram';
-$db_username = 'michael';
-$db_password = '123456';
-$db_con = mysqli_connect($db_server,$db_username,$db_password,$db_name);
+$pdo = pg_connect(getenv("DATABASE_URL"));
+if(!$pdo) {
+    die("Error in connection: " . pg_last_error() . '<br>');
+}else{
+    echo 'Success connect to database<br>';
+}
 
-if($db_con){
+if($pdo){
     if(empty($_POST['username'])||(empty($_POST['password']))){
         echo 'Username or password is empty. This page will return to index page in 3 seconds';
         header('Refresh: 3; URL = index.php');
         exit();
     }else{
-        $sql = mysqli_prepare($db_con,'SELECT user.passwd FROM user WHERE user.username = ?');
-        $sql->bind_param('s',$username);
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
-        $sql->execute();
-        $sql->bind_result($result);
-        $sql->fetch();
+        $sql = "SELECT wiuser.wipass FROM wiuser WHERE wiuser.winame = ".$username;
+
+        $result = pg_exec($pdo,$sql);
+
         if($result){
-            if($result == $password){
+            $flag = 0;
+            while($row = pg_fetch_row($result)){
+                if($row[2]==$password){
+                    $flag = 1;
+                }
+            }
+            if($flag == 1){
                 //The user login successfully
                 //Set cookies
                 setcookie('user',$username,time()+3600);
-                $sql->close();
-                $db_con->close();
+                pg_close($pdo);
                 header('Location: index.php');
                 exit();
             }else{
                 //Wrong password
                 echo 'Wrong password! This page will return to index page in 3 seconds.';
-                $sql->close();
-                $db_con->close();
+                pg_close($pdo);
                 header('Refresh: 3; URL = index.php');
                 exit();
             }
         }else{
             //Username not exist
             echo 'Username not exist! This page will return to index page in 3 seconds.';
-            $sql->close();
-            $db_con->close();
+            pg_close($pdo);
             header('Refresh: 3; URL = index.php');
             exit();
         }
