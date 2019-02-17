@@ -1,9 +1,6 @@
 <?php
-$db_server = 'localhost';
-$db_name = 'webinstagram';
-$db_username = 'michael';
-$db_password = '123456';
-$db_con = mysqli_connect($db_server,$db_username,$db_password,$db_name);
+$pdo = pg_connect(getenv("DATABASE_URL"));
+
 $loop_tmp = 1;
 if(isset($_GET['page'])){
     $page_num = $_GET['page'];
@@ -48,17 +45,17 @@ if(isset($_GET['page'])){
     <button><a href="login.html">Click here to login</a></button><br>
 <?php endif; ?>
 
-<?php if($db_con): ?>
+<?php if($pdo): ?>
     <?php
         $sql = 'SELECT iname FROM image WHERE iclass = 0 ORDER BY create_time DESC';
         if(isset($_COOKIE['user'])){
             $sql = 'SELECT iname FROM image ORDER BY create_time DESC';
         }
     ?>
-    <?php $result = $db_con->query($sql);?>
-    <?php $max_row = $result->num_rows; ?>
-    <?php if($result->num_rows>0): ?>
-        <?php while ($row = $result->fetch_assoc()){?>
+    <?php $result = pg_query($pdo,$sql);?>
+    <?php $max_row = pg_num_rows($result); ?>
+    <?php if($max_row>0): ?>
+        <?php while ($row = pg_fetch_assoc($result)){?>
             <?php if((8*($page_num-1) < $loop_tmp)&&($loop_tmp <= 8*$page_num)): ?>
                 <?php
                     $display_img = 'photo_album/'.$row['iname'];

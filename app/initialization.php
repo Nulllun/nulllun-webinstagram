@@ -18,15 +18,11 @@ foreach ($files2 as $file2){
 }
 
 //Delete all database records of photo
-$db_server = 'localhost';
-$db_name = 'webinstagram';
-$db_username = 'michael';
-$db_password = '123456';
-$db_con = mysqli_connect($db_server,$db_username,$db_password,$db_name);
+$pdo = pg_connect(getenv("DATABASE_URL"));
 
-if($db_con){
+if($pdo){
     $drop_table_sql = 'DROP TABLE image';
-    if(!$db_con->query($drop_table_sql)){
+    if(!pg_query($pdo,$drop_table_sql)){
         echo 'Table "image" cannot be dropped<br>';
     }
 }else{
@@ -34,8 +30,8 @@ if($db_con){
 }
 
 //Create database tables
-$create_table_sql = 'CREATE TABLE image (iid INT NOT NULL AUTO_INCREMENT, iname CHAR(255) NOT NULL, iclass INT NOT NULL, create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (iid))';
-if(!$db_con->query($create_table_sql)){
+$create_table_sql = "CREATE TABLE image(iid SERIAL PRIMARY KEY,iname CHAR(255) NOT NULL ,iclass INT NOT NULL ,create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);";
+if(!pg_query($pdo,$create_table_sql)){
     echo 'Table "image" cannot be created<br>';
 }
 
