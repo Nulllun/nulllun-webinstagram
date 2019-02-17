@@ -14,7 +14,8 @@ if($pdo){
     }else{
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $sql = "SELECT wipass FROM wiuser WHERE winame = ".$username;
+        if($username=='Alice')echo "The user is Alice<br>";
+        $sql = "SELECT wiuser.wipass FROM wiuser WHERE wiuser.winame = ".$username;
         echo $sql.'<br>';
         $result = pg_query($pdo,$sql);
 
