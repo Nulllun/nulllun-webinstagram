@@ -1,6 +1,7 @@
 <?php
 
 $pdo = pg_connect(getenv("DATABASE_URL"));
+
 if(!$pdo){
     die("Error in connection: " . pg_last_error());
 }
@@ -14,3 +15,5 @@ $insert_alice = pg_query($pdo,"INSERT INTO wi_user(wi_name,wi_pass) VALUES ('Ali
 if($create_user) echo 'Success create user table<br>';
 if($insert_admin) echo 'Success insert admin<br>';
 if($insert_alice) echo 'Success insert alice<br>';
+
+?>
