@@ -37,7 +37,7 @@ try{
 
 try{
     pg_query($pdo,"DROP TABLE image");
-    $create_img = pg_query($pdo,"CREATE TABLE image(iid SERIAL PRIMARY KEY,iname CHAR(255) NOT NULL ,iclass INT NOT NULL ,create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP());");
+    $create_img = pg_query($pdo,"CREATE TABLE image(iid SERIAL PRIMARY KEY,iname CHAR(255) NOT NULL ,iclass INT NOT NULL ,create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);");
 }catch (PDOException $e){
     echo $e->getMessage().'<br>';
 }
