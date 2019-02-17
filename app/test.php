@@ -9,8 +9,6 @@ if(!$pdo) {
     echo 'Success connect to database<br>';
 }
 
-echo
-
 try{
     pg_query($pdo,"CREATE TABLE wiuser(uid INT AUTO_INCREMENT PRIMARY KEY, winame CHAR(20) NOT NULL, wipass CHAR(20) NOT NULL)");
 
