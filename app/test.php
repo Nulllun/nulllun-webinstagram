@@ -15,9 +15,13 @@ try{
     }else{
         echo 'Created table<br>';
     }
-    pg_query($pdo,"INSERT INTO wiuser(winame,wipass) VALUES ('admin','minda123')");
+    $name1 = 'admin';
+    $name2 = 'Alice';
+    $pw1 = 'minda123';
+    $pw2 = 'csci4140';
+    pg_query($pdo,"INSERT INTO wiuser(winame,wipass) VALUES (".$name1.",".$pw1.")");
 
-    pg_query($pdo,"INSERT INTO wiuser(winame,wipass) VALUES ('Alice','csci4140')");
+    pg_query($pdo,"INSERT INTO wiuser(winame,wipass) VALUES (".$name2.",".$pw2.")");
 
     $result = pg_query($pdo,"SELECT * FROM wiuser");
     if($result) {
