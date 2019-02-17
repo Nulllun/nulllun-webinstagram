@@ -1,4 +1,5 @@
 <?php
+echo '<h1>Testing</h1>';
 
 $pdo = pg_connect(getenv("DATABASE_URL"));
 
