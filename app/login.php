@@ -22,7 +22,7 @@ if($pdo){
         if($result){
             $flag = 0;
             while($row = pg_fetch_row($result)){
-                if($row[1]==$username&&$row[2]==$password){
+                if(trim($row[1])==$username&&trim($row[2])==$password){
                     $flag = 1;
                 }
                 echo $row[1].'|'.$username.'|'.$row[2].'|'.$password.'<br>';
