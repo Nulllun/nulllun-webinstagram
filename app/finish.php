@@ -18,7 +18,7 @@ $pdo = pg_connect(getenv("DATABASE_URL"));
 if($pdo){
     //pg_prepare($dbconn, "my_query", 'SELECT * FROM shops WHERE name = $1');
     $sql = pg_prepare($pdo,'insert_img','INSERT INTO image(iname, iclass) VALUES (?,?)');
-    $sql = pg_execute($pdo,'insert_img',$tmp_filename,$iclass);
+    $sql = pg_execute($pdo,'insert_img',array($tmp_filename,$iclass));
     //$sql = pg_execute($pdo,'insert_img', array($tmp_filename,$iclass));
     //$sql->bind_param('si',$tmp_filename,$iclass);
     if($sql){
