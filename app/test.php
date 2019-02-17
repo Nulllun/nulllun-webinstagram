@@ -10,7 +10,7 @@ if(!$pdo) {
 }
 
 try{
-    $create_user = pg_query($pdo,"CREATE TABLE wiuser(uid INT AUTO_INCREMENT PRIMARY KEY, winame CHAR(20) NOT NULL, wipass CHAR(20) NOT NULL)");
+    $create_user = pg_query($pdo,"CREATE TABLE wiuser(uid SERIAL PRIMARY KEY, winame CHAR(20) NOT NULL, wipass CHAR(20) NOT NULL)");
     if(!$create_user){
         echo 'Cannot create table<br>';
     }
