@@ -8,6 +8,7 @@ if(!$pdo) {
 }else{
     echo 'Success connect to database<br>';
 }
+
 try{
     pg_exec($pdo,"CREATE TABLE wi_user(uid INT AUTO_INCREMENT PRIMARY KEY, wi_name CHAR(20) NOT NULL, wi_pass CHAR(20) NOT NULL)");
 
@@ -18,7 +19,7 @@ try{
 }catch (PDOException $e){
     echo $e->getMessage().'<br>';
 }
-
+echo 'hi<br>';
 //if($create_user) echo 'Success create user table<br>';
 //if($insert_admin) echo 'Success insert admin<br>';
 //if($insert_alice) echo 'Success insert alice<br>';
