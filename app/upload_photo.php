@@ -55,7 +55,7 @@ $real_format = $img_info['format'];
 
 if($imageFileType == 'jpg'){
     if(!($real_format == 'jpeg'||$real_format == 'jpg')){
-        setcookie('uploadErr','Uploaded file extension does not match its content',time()+30);
+        setcookie('uploadErr','Uploaded file extension does not match its content'.'real format: '.$real_format,time()+30);
         header('Location: index.php');
         exit();
         $uploadOk = 0;
