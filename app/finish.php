@@ -17,11 +17,11 @@ $pdo = pg_connect(getenv("DATABASE_URL"));
 
 if($pdo){
     //pg_prepare($dbconn, "my_query", 'SELECT * FROM shops WHERE name = $1');
-    $sql = 'INSERT INTO image(iname, iclass) VALUES ('.$tmp_filename.','.$iclass.')';
-    $result = pg_query($pdo,$sql);
+    $sql = pg_prepare($pdo,'insert_img','INSERT INTO image(iname, iclass) VALUES (?,?)');
+    $sql = pg_execute($pdo,'insert_img',$tmp_filename,$iclass);
     //$sql = pg_execute($pdo,'insert_img', array($tmp_filename,$iclass));
     //$sql->bind_param('si',$tmp_filename,$iclass);
-    if($result){
+    if($sql){
         //echo 'Record has been added to database.<br>';
     }else{
         echo 'Fail to add record to database.<br>';
@@ -32,7 +32,7 @@ if($pdo){
     echo 'Fail to add record to database.<br>';
 }
 
-$permalink = 'http://'.$_SERVER[HTTP_HOST].'/'.$target_file;
+$permalink = 'https://'.$_SERVER[HTTP_HOST].'/'.$target_file;
 echo 'The permalink: '.$permalink.'<br>';
 echo "<img src='".$target_file."'/><br>";
 echo '<a href="index.php">Back to index page</a>';

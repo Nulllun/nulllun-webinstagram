@@ -65,7 +65,7 @@ if(isset($_GET['page'])){
                     $tmp_img = file_get_contents($display_img);
                     $resized_img->readImageBlob($tmp_img);
                     $resized_img->resizeImage(300,300,1,1,True);
-                    $permalink = 'http://'.$_SERVER[HTTP_HOST].'/'.$display_img;
+                    $permalink = 'https://'.$_SERVER[HTTP_HOST].'/'.$display_img;
                     echo '<img src="data:image/'.$ext.';base64,'.base64_encode($resized_img->getImageBlob()).'" alt="" />';
                     echo 'The permalink: '.$permalink.'<br>';
                     $resized_img->destroy();
