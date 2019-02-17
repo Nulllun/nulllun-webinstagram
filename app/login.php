@@ -18,14 +18,13 @@ if($pdo){
         $sql = "SELECT * FROM wiuser";
         echo $sql.'<br>';
         $result = pg_query($pdo,$sql);
-
         if($result){
             $flag = 0;
-            while($row = pg_fetch_row($result)){
-                if(trim($row[1])==$username&&trim($row[2])==$password){
+            while($row = pg_fetch_assoc($result)){
+                if($row[1]==$username&&$row[2]==$password){
                     $flag = 1;
                 }
-                echo $row[1].'|'.$username.'|'.$row[2].'|'.$password.'<br>';
+                //echo $row[1].'|'.$username.'|'.$row[2].'|'.$password.'<br>';
             }
             if($flag == 1){
                 //The user login successfully
