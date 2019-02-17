@@ -49,6 +49,17 @@ if($imageFileType != "jpg" && $imageFileType != "png" &&  $imageFileType != "gif
     exit();
     $uploadOk = 0;
 }
+$check_img = new Imagick($_FILES["fileToUpload"]["tmp_name"]);
+$img_info = $check_img->identifyImage();
+$real_format = $img_info['format'];
+
+if($imageFileType!=$real_format){
+    setcookie('uploadErr','Uploaded file extension does not match its content',time()+30);
+    header('Location: index.php');
+    exit();
+    $uploadOk = 0;
+}
+
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     //echo "Sorry, your file was not uploaded.<br>";
