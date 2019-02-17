@@ -26,7 +26,6 @@ if(isset($_GET['page'])){
 </head>
 <body>
 <h1>Welcome to WebInstagram</h1>
-<a href="test.php">Test</a><br>
 <?php
     if(isset($_COOKIE['user']))echo 'Welcome back! ' .$_COOKIE['user'].'<br>';
     else echo 'Hello Guest!<br>';
@@ -59,10 +58,6 @@ if(isset($_GET['page'])){
             <?php if((8*($page_num-1) < $loop_tmp)&&($loop_tmp <= 8*$page_num)): ?>
                 <?php
                     $display_img = trim('photo_album/'.$row['iname']);
-                    $display_img2 = 'photo_album/'.$row['iname'];
-                    echo $display_img.'<br>';
-                    echo $display_img2.'<br>';
-                    
                     $ext = pathinfo($display_img);
                     $ext = $ext['extension'];
                     $resized_img = new Imagick();
