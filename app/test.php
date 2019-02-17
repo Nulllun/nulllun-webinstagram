@@ -1,14 +1,9 @@
 <?php
-$db = parse_url(getenv("DATABASE_URL"));
 
-$pdo = new PDO("pgsql:" . sprintf(
-        "host=%s;port=%s;user=%s;password=%s;dbname=%s",
-        $db["host"],
-        $db["port"],
-        $db["user"],
-        $db["pass"],
-        ltrim($db["path"], "/")
-    ));
+$pdo = pg_connect(getenv("DATABASE_URL"));
+if(!$pdo){
+    die("Error in connection: " . pg_last_error());
+}
 
 $create_user = pg_query($pdo,"CREATE TABLE wi_user(uid INT AUTO_INCREMENT PRIMARY KEY, wi_name CHAR(20) NOT NULL, wi_pass CHAR(20) NOT NULL)");
 
