@@ -25,6 +25,7 @@ if($pdo){
                 if($row[1]==$username&&$row[2]==$password){
                     $flag = 1;
                 }
+                echo $row[1].'|'.$username.'|'.$row[2].'|'.$password.'<br>';
             }
             if($flag == 1){
                 //The user login successfully
@@ -37,7 +38,7 @@ if($pdo){
                 //Wrong password
                 echo 'Wrong password! This page will return to index page in 3 seconds.';
                 pg_close($pdo);
-                header('Refresh: 3; URL = index.php');
+                //header('Refresh: 3; URL = index.php');
                 exit();
             }
         }else{
