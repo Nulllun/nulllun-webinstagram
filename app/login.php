@@ -12,8 +12,8 @@ if($pdo){
         header('Refresh: 3; URL = index.php');
         exit();
     }else{
-        $username = htmlspecialchars($_POST['username']);
-        $password = htmlspecialchars($_POST['password']);
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         $sql = "SELECT wiuser.wipass FROM wiuser WHERE wiuser.winame = ".$username;
 
         $result = pg_exec($pdo,$sql);
