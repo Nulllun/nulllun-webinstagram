@@ -59,7 +59,7 @@ if(isset($_GET['page'])){
             <?php if((8*($page_num-1) < $loop_tmp)&&($loop_tmp <= 8*$page_num)): ?>
                 <?php
                     echo 'HI<br>';
-                    $display_img = 'photo_album/'.$row['iname'];
+                    $display_img = 'photo_album/'.trim($row['iname']);
                     $ext = pathinfo($display_img);
                     $ext = $ext['extension'];
                     $resized_img = new Imagick();
