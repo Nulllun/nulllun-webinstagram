@@ -3,8 +3,10 @@ echo '<h1>Testing</h1>';
 
 $pdo = pg_connect(getenv("DATABASE_URL"));
 
-if(!$pdo){
+if(!$pdo) {
     die("Error in connection: " . pg_last_error());
+}else{
+    echo 'Success connect to database<br>';
 }
 
 $create_user = pg_query($pdo,"CREATE TABLE wi_user(uid INT AUTO_INCREMENT PRIMARY KEY, wi_name CHAR(20) NOT NULL, wi_pass CHAR(20) NOT NULL)");
