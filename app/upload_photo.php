@@ -54,24 +54,24 @@ $img_info = $check_img->identifyImage();
 $real_format = $img_info['format'];
 
 if($imageFileType == 'jpg'){
-    if(!($real_format == 'jpeg'||$real_format == 'jpg')){
-        setcookie('uploadErr','Uploaded file extension does not match its content'.'real format: '.$real_format,time()+30);
+    if(!$real_format == 'JPEG'){
+        setcookie('uploadErr','Uploaded file extension does not match its content'.' Real format: '.$real_format,time()+30);
         header('Location: index.php');
         exit();
         $uploadOk = 0;
     }
 }
 if($imageFileType == 'gif'){
-    if(!$real_format == 'gif'){
-        setcookie('uploadErr','Uploaded file extension does not match its content',time()+30);
+    if(!$real_format == 'GIF'){
+        setcookie('uploadErr','Uploaded file extension does not match its content'.' Real format: '.$real_format,time()+30);
         header('Location: index.php');
         exit();
         $uploadOk = 0;
     }
 }
 if($imageFileType == 'png'){
-    if(!$real_format == 'png'){
-        setcookie('uploadErr','Uploaded file extension does not match its content',time()+30);
+    if(!$real_format == 'PNG'){
+        setcookie('uploadErr','Uploaded file extension does not match its content'.' Real format: '.$real_format,time()+30);
         header('Location: index.php');
         exit();
         $uploadOk = 0;
